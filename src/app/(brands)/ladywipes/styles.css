@@ -1,0 +1,166 @@
+/*
+  Variables locales de Lady Wipes. Scope: .ladywipes.
+  No modifica ningún token global de WINCO ni comparte nada con Macho Wipes.
+*/
+
+.ladywipes {
+  --lw-black: #14060F;
+  --lw-black-lift: #22091A;
+  --lw-pink: #FF1F8F;
+  --lw-pink-hot: #FF52AA;
+  --lw-lime: #7CE04A;
+  --lw-white: #FFFFFF;
+  --lw-gray: #C4A8B8;
+
+  --lw-bg: var(--lw-black);
+  --lw-fg: var(--lw-white);
+  --lw-accent: var(--lw-pink);
+  --lw-muted: var(--lw-gray);
+}
+
+/* Wordmark / display font — Anton */
+.font-lw-heading {
+  font-family: var(--lw-font-heading), Impact, "Franklin Gothic",
+    "Arial Narrow", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+/* ══════════ FONDO — deep + brillo pink concentrado ══════════ */
+
+.ladywipes-shell {
+  background:
+    radial-gradient(
+      ellipse 720px 520px at 25% 20%,
+      rgba(255, 82, 170, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 620px 480px at 82% 85%,
+      rgba(255, 31, 143, 0.09),
+      transparent 55%
+    ),
+    linear-gradient(180deg, #1A0812 0%, #14060F 100%);
+}
+
+.lw-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  background: radial-gradient(
+    circle,
+    rgba(255, 82, 170, 0.24) 0%,
+    rgba(255, 31, 143, 0.11) 35%,
+    transparent 70%
+  );
+}
+
+/* ══════════ TIPOGRAFÍA CON GLOW ══════════ */
+
+.lw-text-neon {
+  text-shadow:
+    0 0 8px rgba(255, 82, 170, 0.95),
+    0 0 24px rgba(255, 31, 143, 0.6);
+}
+
+/* ══════════ CARDS ══════════ */
+
+.lw-card {
+  position: relative;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #23091A 0%, #0F040B 100%);
+  transition:
+    transform 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.lw-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 82, 170, 0.75) 0%,
+    rgba(255, 31, 143, 0.16) 35%,
+    rgba(255, 31, 143, 0.06) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: background 300ms;
+}
+
+.lw-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 70px -20px rgba(255, 82, 170, 0.45),
+    0 0 60px -20px rgba(255, 31, 143, 0.3);
+}
+
+.lw-card:hover::before {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 82, 170, 1) 0%,
+    rgba(255, 31, 143, 0.4) 35%,
+    rgba(255, 31, 143, 0.15) 100%
+  );
+}
+
+/* Ícono con glow */
+.lw-icon-glow {
+  filter: drop-shadow(0 0 6px rgba(255, 82, 170, 0.75))
+    drop-shadow(0 0 18px rgba(255, 31, 143, 0.4));
+}
+
+.lw-icon-glow-lime {
+  filter: drop-shadow(0 0 6px rgba(124, 224, 74, 0.7))
+    drop-shadow(0 0 18px rgba(124, 224, 74, 0.35));
+}
+
+/* ══════════ BOTONES ══════════ */
+
+@keyframes lw-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(255, 82, 170, 0.55),
+      0 0 40px rgba(255, 31, 143, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 36px rgba(255, 82, 170, 0.85),
+      0 0 72px rgba(255, 31, 143, 0.35);
+  }
+}
+
+.lw-btn-pulse {
+  animation: lw-pulse 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lw-btn-pulse {
+    animation: none;
+    box-shadow: 0 0 30px rgba(255, 82, 170, 0.6);
+  }
+}
+
+/* ══════════ HERO ══════════ */
+
+.lw-hero-image {
+  -webkit-mask-image: radial-gradient(
+    ellipse 95% 95% at 62% 40%,
+    #000 55%,
+    transparent 92%
+  );
+  mask-image: radial-gradient(
+    ellipse 95% 95% at 62% 40%,
+    #000 55%,
+    transparent 92%
+  );
+}
