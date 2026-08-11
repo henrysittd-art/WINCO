@@ -38,14 +38,14 @@ export const products: Product[] = [
     floating: true,
   },
   {
-    id: "48-flushable",
-    nombre: "48 Flushable Wipes",
-    formato: "Paquete estándar",
-    cantidad: "48 wipes · 7×7 in",
+    id: "travel-pack",
+    nombre: "Travel Pack",
+    formato: "Bolsa resellable",
+    cantidad: "24 wipes · XL",
     descripcion:
-      "El clásico. Perfecto para el baño de casa: húmedos, resistentes y desechables al inodoro.",
-    // TODO: reemplazar por foto individual del pack de 48
-    imagen: "/images/macho-wipes/product.jpg",
+      "El formato portátil. Bolsa resellable con hanger — cabe en la mochila, la guantera o el bolsillo lateral.",
+    imagen: "/images/macho-wipes/travel-pack.png",
+    floating: true,
   },
   {
     id: "24-wipes",
