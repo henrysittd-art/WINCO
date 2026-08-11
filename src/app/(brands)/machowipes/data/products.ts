@@ -48,14 +48,14 @@ export const products: Product[] = [
     floating: true,
   },
   {
-    id: "24-wipes",
-    nombre: "24 Wipes",
-    formato: "Bolsa compacta",
-    cantidad: "24 wipes",
+    id: "on-the-go",
+    nombre: "On The Go",
+    formato: "Pack de bolsillo",
+    cantidad: "10 wipes",
     descripcion:
-      "El punto medio. Ideal para probar antes del pack grande o llevar en la mochila.",
-    // TODO: reemplazar por foto individual del pack de 24
-    imagen: "/images/macho-wipes/product.jpg",
+      "Sachet slim para llevar en el bolsillo, la mochila o la guantera. Discretos y siempre a mano.",
+    imagen: "/images/macho-wipes/on-the-go.png",
+    floating: true,
   },
   {
     id: "canister",
