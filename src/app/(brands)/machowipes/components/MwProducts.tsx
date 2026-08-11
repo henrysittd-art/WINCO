@@ -12,6 +12,27 @@ export default function MwProducts() {
       id="productos"
       className="relative overflow-hidden py-24 md:py-32"
     >
+      {/* Filtro SVG que liftea los negros puros a un gris consistente,
+          para que las fotos de empaques sobre fondo negro se vean con
+          la misma ambient grey de las que traen fondo fotográfico. */}
+      <svg
+        aria-hidden
+        width="0"
+        height="0"
+        className="absolute"
+        style={{ position: "absolute", width: 0, height: 0 }}
+      >
+        <defs>
+          <filter id="mw-lift-blacks" colorInterpolationFilters="sRGB">
+            <feComponentTransfer>
+              <feFuncR type="linear" slope="0.9" intercept="0.11" />
+              <feFuncG type="linear" slope="0.9" intercept="0.11" />
+              <feFuncB type="linear" slope="0.9" intercept="0.11" />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
+
       {/* Gradiente de transición desde la sección anterior */}
       <div
         aria-hidden
@@ -72,15 +93,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Imagen del producto */}
       {product.floating ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden">
-          {/* Ambient grey backdrop — imita el fondo fotográfico y lifta
-              los negros puros del PNG para que ambas cards floating se
-              vean con el mismo gris. Fade radial hacia el card body. */}
+          {/* Ambient grey backdrop — funde los bordes de la foto con el
+              color de la card, evitando que se vea un rectángulo. */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 88% 92% at 50% 55%, #1c1c1c 0%, #141414 55%, transparent 100%)",
+                "radial-gradient(ellipse 90% 95% at 50% 55%, #1c1c1c 0%, #161616 55%, transparent 100%)",
             }}
           />
           <Image
@@ -90,11 +110,11 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="relative scale-[1.22] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.28]"
             style={{
-              mixBlendMode: "lighten",
+              filter: "url(#mw-lift-blacks)",
               maskImage:
-                "radial-gradient(ellipse 78% 80% at 50% 52%, #000 55%, transparent 100%)",
+                "radial-gradient(ellipse 80% 82% at 50% 52%, #000 60%, transparent 100%)",
               WebkitMaskImage:
-                "radial-gradient(ellipse 78% 80% at 50% 52%, #000 55%, transparent 100%)",
+                "radial-gradient(ellipse 80% 82% at 50% 52%, #000 60%, transparent 100%)",
             }}
           />
         </div>

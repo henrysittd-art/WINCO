@@ -28,8 +28,8 @@ export const products: Product[] = [
     floating: true,
   },
   {
-    id: "plastic-canister",
-    nombre: "Plastic Canister",
+    id: "cylinder",
+    nombre: "Cylinder",
     formato: "Envase rígido",
     cantidad: "60 wipes · 7×7 in",
     descripcion:
