@@ -93,14 +93,16 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Imagen del producto */}
       {product.floating ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden">
-          {/* Ambient grey backdrop — funde los bordes de la foto con el
-              color de la card, evitando que se vea un rectángulo. */}
+          {/* Ambient grey de canto a canto en el área de imagen — los
+              PNGs vertical (ej. Travel Pack) no llenan horizontalmente,
+              así que el gris cubre todo el bloque de imagen y transi-
+              ciona al card body en la línea inferior de la card. */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 90% 95% at 50% 55%, #1c1c1c 0%, #161616 55%, transparent 100%)",
+                "radial-gradient(ellipse 120% 110% at 50% 45%, #1e1e1e 0%, #171717 60%, #121212 100%)",
             }}
           />
           <Image

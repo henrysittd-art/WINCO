@@ -50,10 +50,10 @@ export const products: Product[] = [
   {
     id: "on-the-go",
     nombre: "On The Go",
-    formato: "Pack de bolsillo",
+    formato: "Sachet slim",
     cantidad: "10 wipes",
     descripcion:
-      "Sachet slim para llevar en el bolsillo, la mochila o la guantera. Discretos y siempre a mano.",
+      "Formato ultra portátil de 10 wipes. Discreto y siempre a mano para el día a día — mochila, gimnasio o carro.",
     imagen: "/images/macho-wipes/on-the-go.png",
     floating: true,
   },
