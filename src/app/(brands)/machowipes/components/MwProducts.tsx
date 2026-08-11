@@ -70,24 +70,42 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       className="mw-glow-hover group relative flex flex-col overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--mw-accent)_15%,transparent)] bg-[color-mix(in_srgb,var(--mw-fg)_3%,var(--mw-bg))]"
     >
       {/* Imagen del producto */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-70"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(14,165,233,0.25), transparent 70%)",
-          }}
-        />
-        <Image
-          src={product.imagen}
-          alt={product.nombre}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="relative object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-          style={{ mixBlendMode: "screen" }}
-        />
-      </div>
+      {product.floating ? (
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src={product.imagen}
+            alt={product.nombre}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="relative scale-[1.22] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.28]"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 78% 80% at 50% 52%, #000 55%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 78% 80% at 50% 52%, #000 55%, transparent 100%)",
+            }}
+          />
+        </div>
+      ) : (
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-70"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(14,165,233,0.25), transparent 70%)",
+            }}
+          />
+          <Image
+            src={product.imagen}
+            alt={product.nombre}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="relative object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+            style={{ mixBlendMode: "screen" }}
+          />
+        </div>
+      )}
 
       {/* Info */}
       <div className="flex flex-1 flex-col p-6 md:p-7">

@@ -11,6 +11,9 @@ export type Product = {
   // de rediseñar el componente.
   price?: string;
   buyUrl?: string;
+  // Cuando la imagen es una foto individual del empaque sobre fondo oscuro,
+  // se renderiza sin overlay ni mix-blend y ocupa más espacio en la card.
+  floating?: boolean;
 };
 
 export const products: Product[] = [
@@ -21,8 +24,8 @@ export const products: Product[] = [
     cantidad: "48 wipes · 7×7 in",
     descripcion:
       "Tamaño XL para máxima cobertura. Fibras vegetales que se desintegran en el inodoro.",
-    // TODO: reemplazar por foto individual del XL Flushable
-    imagen: "/images/macho-wipes/product.jpg",
+    imagen: "/images/macho-wipes/xl-flushable.png",
+    floating: true,
   },
   {
     id: "pack-6",
