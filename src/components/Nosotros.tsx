@@ -29,7 +29,9 @@ export default function Nosotros() {
               <p>
                 En WINCO identificamos oportunidades dentro de categorías de
                 consumo cotidiano y las transformamos en productos con
-                identidad, funcionalidad y una propuesta clara.
+                identidad, funcionalidad y una propuesta clara. Hoy
+                desarrollamos productos de cuidado e higiene personal, con una
+                línea que sigue creciendo.
               </p>
               <p>
                 Nuestro objetivo es desarrollar marcas modernas, relevantes y

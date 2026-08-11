@@ -12,7 +12,7 @@ const cards = [
     label: "Producto",
     title: "Funcional desde el primer día.",
     description:
-      "Desarrollamos productos pensados para resolver necesidades reales del consumidor.",
+      "Desarrollamos productos pensados para resolver necesidades reales del consumidor, desde el cuidado personal hasta nuevas categorías de uso diario.",
   },
   {
     icon: Sparkles,
