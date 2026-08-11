@@ -58,13 +58,13 @@ export const products: Product[] = [
     floating: true,
   },
   {
-    id: "canister",
-    nombre: "Tarro dispensador",
-    formato: "Envase rígido",
-    cantidad: "48 wipes · 7×7 in",
+    id: "pocket-size",
+    nombre: "Pocket Size",
+    formato: "Caja dispensadora",
+    cantidad: "30 wipes individuales",
     descripcion:
-      "Se queda en la casa. Cierre hermético, dispensa uno a la vez sin que se seque el resto.",
-    // TODO: reemplazar por foto individual del tarro dispensador
-    imagen: "/images/macho-wipes/product.jpg",
+      "Cada wipe viene sellado en su propio sobre — perfecto para llevar uno cuando sabés que va a hacer falta.",
+    imagen: "/images/macho-wipes/pocket-size.png",
+    floating: true,
   },
 ];
