@@ -72,6 +72,17 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       {/* Imagen del producto */}
       {product.floating ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden">
+          {/* Ambient grey backdrop — imita el fondo fotográfico y lifta
+              los negros puros del PNG para que ambas cards floating se
+              vean con el mismo gris. Fade radial hacia el card body. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 88% 92% at 50% 55%, #1c1c1c 0%, #141414 55%, transparent 100%)",
+            }}
+          />
           <Image
             src={product.imagen}
             alt={product.nombre}
@@ -79,6 +90,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="relative scale-[1.22] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.28]"
             style={{
+              mixBlendMode: "lighten",
               maskImage:
                 "radial-gradient(ellipse 78% 80% at 50% 52%, #000 55%, transparent 100%)",
               WebkitMaskImage:
