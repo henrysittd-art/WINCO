@@ -28,14 +28,14 @@ export const products: Product[] = [
     floating: true,
   },
   {
-    id: "pack-6",
-    nombre: "Pack de 6",
-    formato: "Caja multi-pack",
-    cantidad: "6 × 48 wipes",
+    id: "plastic-canister",
+    nombre: "Plastic Canister",
+    formato: "Envase rígido",
+    cantidad: "60 wipes · 7×7 in",
     descripcion:
-      "El value pack. Un mes largo de suministro para uso diario en casa.",
-    // TODO: reemplazar por foto individual del Pack de 6
-    imagen: "/images/macho-wipes/product.jpg",
+      "Cilindro rígido con cierre hermético. Dispensa una toallita a la vez sin que se sequen las demás.",
+    imagen: "/images/macho-wipes/canister.png",
+    floating: true,
   },
   {
     id: "48-flushable",
