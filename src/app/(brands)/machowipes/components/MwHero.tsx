@@ -1,23 +1,90 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
+/*
+ * Hero video full-bleed.
+ *
+ * Poner los archivos de video en /public/videos/macho-wipes/ con estos nombres
+ * (idealmente ambos para cobertura de navegadores):
+ *   - hero.webm  (VP9, ~2-4 MB, 8-12s loop, muted)
+ *   - hero.mp4   (H.264, ~3-6 MB, mismo loop)
+ *
+ * Mientras no existan los archivos, el <video> muestra el poster
+ * (imagen actual del producto) y no se ve rota — solo estática.
+ *
+ * Recomendación de contenido: 8-12s en loop, sin corte visible;
+ * planos cerrados del empaque, wipe siendo sacado del sachet en cámara
+ * lenta, o gotas de agua sobre la tela. Sin audio.
+ */
+const HERO_POSTER = "/images/macho-wipes/product.jpg";
+const HERO_VIDEO_WEBM = "/videos/macho-wipes/hero.webm";
+const HERO_VIDEO_MP4 = "/videos/macho-wipes/hero.mp4";
+
 export default function MwHero() {
+  const reduce = !!useReducedMotion();
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-24 md:pt-20">
-      {/* Glow principal — más brillante y concentrado (no muddy) */}
+      {/* ═══════ Fondo — video full-bleed (o poster estático si reduce) ═══════ */}
+      {reduce ? (
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url(${HERO_POSTER})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+      ) : (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={HERO_POSTER}
+          aria-hidden
+        >
+          <source src={HERO_VIDEO_WEBM} type="video/webm" />
+          <source src={HERO_VIDEO_MP4} type="video/mp4" />
+        </video>
+      )}
+
+      {/* ═══════ Overlays: legibilidad + acento azul + rim light ═══════ */}
+      {/* Vignette diagonal — más oscuro en la izquierda (donde va el texto),
+          fade hacia la derecha para dejar respirar el video */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 720px 500px at 68% 45%, rgba(56, 189, 248, 0.45) 0%, rgba(14, 165, 233, 0.18) 35%, transparent 65%)",
+            "linear-gradient(100deg, rgba(5,11,20,0.88) 0%, rgba(5,11,20,0.72) 32%, rgba(5,11,20,0.42) 62%, rgba(5,11,20,0.28) 100%)",
         }}
       />
-      {/* Rim light superior — línea de luz fina */}
+      {/* Fade inferior — refuerza el borde con la sección siguiente */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, rgba(5,11,20,0.9))",
+        }}
+      />
+      {/* Glow azul concentrado a la derecha */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 620px 460px at 78% 45%, rgba(56, 189, 248, 0.28) 0%, rgba(14, 165, 233, 0.10) 40%, transparent 70%)",
+        }}
+      />
+      {/* Rim light superior */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
@@ -27,12 +94,13 @@ export default function MwHero() {
         }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-[1280px] gap-10 px-6 py-16 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-12 md:px-12 md:py-24">
+      {/* ═══════ Contenido overlay ═══════ */}
+      <div className="relative mx-auto w-full max-w-[1280px] px-6 py-16 md:px-12 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="order-2 md:order-1"
+          className="max-w-[720px]"
         >
           <p
             className="mb-6 text-[12px] font-semibold uppercase tracking-[0.22em]"
@@ -67,31 +135,6 @@ export default function MwHero() {
               Ver productos
               <span aria-hidden>→</span>
             </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-          className="relative order-1 md:order-2"
-        >
-          <div className="relative aspect-[16/10] w-full">
-            <Image
-              src="/images/macho-wipes/product.jpg"
-              alt="Línea Macho Wipes"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="mw-hero-image object-contain"
-              style={{
-                // Filtro SVG: quita fondo negro sin blend haze.
-                // Filter chain adicional: brillo/contraste/saturación para
-                // que los colores del producto salgan más nítidos y vivos.
-                filter:
-                  "url(#mw-logo-clean) brightness(1.08) contrast(1.12) saturate(1.2)",
-              }}
-              priority
-            />
           </div>
         </motion.div>
       </div>
