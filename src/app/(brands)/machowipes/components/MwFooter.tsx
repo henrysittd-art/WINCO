@@ -33,13 +33,13 @@ export default function MwFooter() {
             className="h-40 w-auto md:h-56 lg:h-64"
             style={{ filter: "url(#mw-logo-clean)" }}
           />
-          <p className="mt-5 max-w-md text-[14px] leading-relaxed text-[var(--mw-muted)] md:text-[15px]">
+          <p className="-mt-6 max-w-md text-[14px] leading-relaxed text-[var(--mw-muted)] md:-mt-10 md:text-[15px]">
             Limpieza personal hecha para hombres.
           </p>
         </div>
 
         {/* ═════════ Nav links centrados en fila ═════════ */}
-        <nav className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:mt-14 md:gap-x-12">
+        <nav className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:mt-12 md:gap-x-12">
           {NAV.map((l) => (
             <a
               key={l.href}
