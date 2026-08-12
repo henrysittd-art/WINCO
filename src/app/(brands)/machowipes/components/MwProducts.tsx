@@ -269,7 +269,7 @@ function ProductCard({
         </p>
 
         {/* Precio + CTA (solo si están definidos en products.ts) */}
-        {forSale ? (
+        {forSale && (
           <div className="mt-6 flex items-center justify-between">
             <span className="font-mw-heading text-[22px] text-[var(--mw-fg)]">
               {product.price}
@@ -281,22 +281,6 @@ function ProductCard({
               Comprar
               <span aria-hidden>→</span>
             </a>
-          </div>
-        ) : (
-          <div className="mt-6 flex items-center gap-2">
-            <span className="relative flex h-1.5 w-1.5">
-              <span
-                className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-                style={{ backgroundColor: "var(--mw-blue-hot)" }}
-              />
-              <span
-                className="relative inline-flex h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: "var(--mw-blue-hot)" }}
-              />
-            </span>
-            <p className="text-[11px] uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--mw-muted)_75%,transparent)]">
-              Próximamente disponible
-            </p>
           </div>
         )}
       </div>
