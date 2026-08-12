@@ -4,8 +4,8 @@
 */
 
 .machowipes {
-  --mw-black: #050B14;
-  --mw-black-lift: #0B1524;
+  --mw-black: #000000;
+  --mw-black-lift: #060B12;
   --mw-blue: #0EA5E9;
   --mw-blue-hot: #38BDF8;
   --mw-white: #FFFFFF;
@@ -30,16 +30,21 @@
 .machowipes-shell {
   background:
     radial-gradient(
-      ellipse 720px 520px at 25% 20%,
-      rgba(56, 189, 248, 0.10),
+      ellipse 820px 620px at 20% 15%,
+      rgba(56, 189, 248, 0.20),
       transparent 55%
     ),
     radial-gradient(
-      ellipse 620px 480px at 82% 85%,
-      rgba(14, 165, 233, 0.08),
+      ellipse 720px 560px at 85% 85%,
+      rgba(14, 165, 233, 0.16),
       transparent 55%
     ),
-    linear-gradient(180deg, #0A1220 0%, #050B14 100%);
+    radial-gradient(
+      ellipse 600px 450px at 50% 50%,
+      rgba(56, 189, 248, 0.06),
+      transparent 60%
+    ),
+    #000000;
 }
 
 /* Orbe — más brillante, más chico, con falloff limpio (no muddy) */

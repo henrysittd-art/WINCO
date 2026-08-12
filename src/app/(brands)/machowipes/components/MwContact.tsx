@@ -15,8 +15,6 @@ export default function MwContact() {
       id="contacto"
       className="relative overflow-hidden py-24 md:py-32"
     >
-      {/* ═════════ FIRMA CONTACTO — horizonte cyan al pie + scan lines ═════════ */}
-
       {/* Rim light superior */}
       <div
         aria-hidden
@@ -27,50 +25,24 @@ export default function MwContact() {
         }}
       />
 
-      {/* Scan lines verticales — patrón de líneas verticales (no cuadrícula) */}
+      {/* Blue glow — halo central detrás del título */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[620px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-55"
         style={{
-          backgroundImage:
-            "linear-gradient(90deg, rgba(56,189,248,0.9) 1px, transparent 1px)",
-          backgroundSize: "56px 100%",
-          maskImage:
-            "linear-gradient(to bottom, black 20%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to bottom, black 20%, transparent 100%)",
+          background:
+            "radial-gradient(circle, rgba(56,189,248,0.34), transparent 60%)",
+          filter: "blur(90px)",
         }}
       />
 
-      {/* Horizonte cyan al pie — el gran gesto que cierra la página.
-          Franja luminosa saliendo del piso, tipo salida/entrada de escenario. */}
+      {/* Blue glow inferior — cierre suave hacia el footer */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[420px]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-80"
         style={{
           background:
-            "radial-gradient(ellipse 130% 100% at 50% 100%, rgba(56,189,248,0.45) 0%, rgba(14,165,233,0.18) 30%, transparent 70%)",
-        }}
-      />
-      {/* Línea de horizonte nítida al fondo */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px]"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent 10%, rgba(56,189,248,0.7) 50%, transparent 90%)",
-          filter: "blur(1px)",
-        }}
-      />
-
-      {/* Halo suave detrás del título */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[35%] h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(56,189,248,0.22), transparent 60%)",
-          filter: "blur(80px)",
+            "radial-gradient(ellipse 900px 320px at 50% 100%, rgba(14,165,233,0.22), transparent 70%)",
         }}
       />
 

@@ -36,8 +36,6 @@ export default function MwWhy() {
       id="por-que"
       className="relative overflow-hidden py-24 md:py-32"
     >
-      {/* ═════════ FIRMA WHY — rayo diagonal + grid técnico ═════════ */}
-
       {/* Rim light superior */}
       <div
         aria-hidden
@@ -48,47 +46,14 @@ export default function MwWhy() {
         }}
       />
 
-      {/* Diagonal light beam — rayo que cruza de arriba-derecha a abajo-izquierda */}
+      {/* Blue glow — arriba a la derecha */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-70"
+        className="pointer-events-none absolute right-[-10%] top-[-10%] h-[560px] w-[560px] rounded-full opacity-55"
         style={{
           background:
-            "linear-gradient(115deg, transparent 0%, transparent 40%, rgba(56,189,248,0.12) 50%, transparent 60%, transparent 100%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-50"
-        style={{
-          background:
-            "linear-gradient(115deg, transparent 0%, transparent 62%, rgba(56,189,248,0.08) 68%, transparent 74%, transparent 100%)",
-        }}
-      />
-
-      {/* Grid técnico tight (32px) — sensación de blueprint */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.045]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(56,189,248,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.6) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          maskImage:
-            "radial-gradient(ellipse 80% 100% at 70% 30%, black 15%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 100% at 70% 30%, black 15%, transparent 75%)",
-        }}
-      />
-
-      {/* Orbe azul en la esquina donde nace el rayo */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-[-8%] top-[-12%] h-[480px] w-[480px] rounded-full opacity-35"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(56,189,248,0.32), transparent 65%)",
-          filter: "blur(70px)",
+            "radial-gradient(circle, rgba(56,189,248,0.38), transparent 65%)",
+          filter: "blur(80px)",
         }}
       />
 
