@@ -7,8 +7,6 @@ import { products, type Product } from "../data/products";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const TOTAL_FORMATOS = products.length.toString().padStart(2, "0");
-
 export default function MwProducts() {
   return (
     <section
@@ -99,42 +97,10 @@ export default function MwProducts() {
             </h2>
           </div>
 
-          <div className="flex flex-col items-start gap-4 md:items-end">
-            {/* Badge con conteo total */}
-            <div
-              className="inline-flex items-center gap-2.5 rounded-md border px-3 py-1.5"
-              style={{
-                borderColor:
-                  "color-mix(in srgb, var(--mw-accent) 30%, transparent)",
-                background:
-                  "color-mix(in srgb, var(--mw-accent) 10%, transparent)",
-              }}
-            >
-              <span className="relative flex h-1.5 w-1.5">
-                <span
-                  className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-70"
-                  style={{ backgroundColor: "var(--mw-blue-hot)" }}
-                />
-                <span
-                  className="relative inline-flex h-1.5 w-1.5 rounded-full"
-                  style={{ backgroundColor: "var(--mw-blue-hot)" }}
-                />
-              </span>
-              <span
-                className="font-mw-heading text-[13px] leading-none"
-                style={{ color: "var(--mw-blue-hot)" }}
-              >
-                {TOTAL_FORMATOS}
-              </span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--mw-fg)]">
-                Formatos
-              </span>
-            </div>
-            <p className="max-w-md text-[15px] leading-relaxed text-[var(--mw-muted)] md:text-right">
-              Formatos pensados para cada uso — del pack familiar al que va en
-              la guantera.
-            </p>
-          </div>
+          <p className="max-w-md text-[15px] leading-relaxed text-[var(--mw-muted)] md:text-right">
+            Formatos pensados para cada uso — del pack familiar al que va en
+            la guantera.
+          </p>
         </motion.div>
 
         <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-3">
