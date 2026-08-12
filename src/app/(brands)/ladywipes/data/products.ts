@@ -23,8 +23,8 @@ export const products: Product[] = [
     cantidad: "48 wipes · 7×7 in",
     descripcion:
       "Tamaño XL para máxima cobertura. Fragrance-free con 99% agua purificada e ingredientes de origen vegetal que se desintegran en el inodoro.",
-    // TODO: reemplazar por foto individual del XL Flushable Lady
-    imagen: "/images/lady-wipes/product.jpg",
+    imagen: "/images/lady-wipes/xl-flushable.png",
+    floating: true,
   },
   {
     id: "cylinder",
