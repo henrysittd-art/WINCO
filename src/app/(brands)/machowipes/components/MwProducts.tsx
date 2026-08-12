@@ -155,12 +155,7 @@ export default function MwProducts() {
 
         <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, i) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              index={i}
-              total={products.length}
-            />
+            <ProductCard key={product.id} product={product} index={i} />
           ))}
         </div>
       </div>
@@ -171,11 +166,9 @@ export default function MwProducts() {
 function ProductCard({
   product,
   index,
-  total,
 }: {
   product: Product;
   index: number;
-  total: number;
 }) {
   const forSale = Boolean(product.price && product.buyUrl);
   const [spot, setSpot] = useState<{ x: number; y: number } | null>(null);
@@ -184,9 +177,6 @@ function ProductCard({
     const r = e.currentTarget.getBoundingClientRect();
     setSpot({ x: e.clientX - r.left, y: e.clientY - r.top });
   };
-
-  const num = (index + 1).toString().padStart(2, "0");
-  const tot = total.toString().padStart(2, "0");
 
   return (
     <motion.article
@@ -198,24 +188,6 @@ function ProductCard({
       onMouseLeave={() => setSpot(null)}
       className="mw-glow-hover group relative flex flex-col overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--mw-accent)_15%,transparent)] bg-[color-mix(in_srgb,var(--mw-fg)_3%,var(--mw-bg))]"
     >
-      {/* Numeración técnica sobre la imagen */}
-      <div className="pointer-events-none absolute left-4 top-4 z-20 flex items-center gap-1.5">
-        <span
-          className="font-mw-heading text-[13px] leading-none"
-          style={{ color: "var(--mw-blue-hot)" }}
-        >
-          {num}
-        </span>
-        <span
-          className="text-[10px] font-mono uppercase tracking-[0.14em] text-[var(--mw-muted)]"
-          style={{
-            fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
-          }}
-        >
-          / {tot}
-        </span>
-      </div>
-
       {/* Spotlight cursor por card */}
       {spot && (
         <div
