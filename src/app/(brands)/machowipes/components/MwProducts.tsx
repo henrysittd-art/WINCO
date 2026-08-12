@@ -2,9 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState, type MouseEvent } from "react";
 import { products, type Product } from "../data/products";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
+const TOTAL_FORMATOS = products.length.toString().padStart(2, "0");
 
 export default function MwProducts() {
   return (
@@ -42,36 +45,122 @@ export default function MwProducts() {
             "linear-gradient(to bottom, rgba(8,17,28,0.7), transparent)",
         }}
       />
-      <div className="mx-auto max-w-[1280px] px-6 md:px-12">
+
+      {/* Grid pattern técnico con máscara radial */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(56,189,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.5) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+        }}
+      />
+
+      {/* Orbe glow difuso a la izquierda para contra-balancear el orbe
+          derecho de la sección "Por qué Macho" */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[-10%] bottom-[-10%] h-[520px] w-[520px] rounded-full opacity-25"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(56,189,248,0.28), transparent 65%)",
+          filter: "blur(60px)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-12">
+        {/* ═════════ Header ═════════ */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end"
+          className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end"
         >
           <div>
-            <p
-              className="text-[12px] font-semibold uppercase tracking-[0.22em]"
-              style={{ color: "var(--mw-accent)" }}
-            >
-              Nuestra línea
-            </p>
+            <div className="flex items-center gap-4">
+              <p
+                className="text-[12px] font-semibold uppercase tracking-[0.22em]"
+                style={{ color: "var(--mw-accent)" }}
+              >
+                Nuestra línea
+              </p>
+              <span
+                aria-hidden
+                className="h-px w-14 opacity-60"
+                style={{
+                  background:
+                    "linear-gradient(90deg, var(--mw-blue-hot), transparent)",
+                }}
+              />
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.18em] text-[var(--mw-muted)]"
+                style={{
+                  fontFamily:
+                    "ui-monospace, SFMono-Regular, Menlo, monospace",
+                }}
+              >
+                MW / LINE-UP · 2026
+              </span>
+            </div>
             <h2 className="font-mw-heading mt-4 text-[36px] leading-[0.95] text-[var(--mw-fg)] md:text-[56px]">
               ELEGÍ TU
               <br />
               PRESENTACIÓN.
             </h2>
           </div>
-          <p className="max-w-md text-[15px] leading-relaxed text-[var(--mw-muted)]">
-            Formatos pensados para cada uso — del pack familiar al que va
-            en la guantera.
-          </p>
+
+          <div className="flex flex-col items-start gap-4 md:items-end">
+            {/* Badge con conteo total */}
+            <div
+              className="inline-flex items-center gap-2.5 rounded-md border px-3 py-1.5"
+              style={{
+                borderColor:
+                  "color-mix(in srgb, var(--mw-accent) 30%, transparent)",
+                background:
+                  "color-mix(in srgb, var(--mw-accent) 10%, transparent)",
+              }}
+            >
+              <span className="relative flex h-1.5 w-1.5">
+                <span
+                  className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-70"
+                  style={{ backgroundColor: "var(--mw-blue-hot)" }}
+                />
+                <span
+                  className="relative inline-flex h-1.5 w-1.5 rounded-full"
+                  style={{ backgroundColor: "var(--mw-blue-hot)" }}
+                />
+              </span>
+              <span
+                className="font-mw-heading text-[13px] leading-none"
+                style={{ color: "var(--mw-blue-hot)" }}
+              >
+                {TOTAL_FORMATOS}
+              </span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--mw-fg)]">
+                Formatos
+              </span>
+            </div>
+            <p className="max-w-md text-[15px] leading-relaxed text-[var(--mw-muted)] md:text-right">
+              Formatos pensados para cada uso — del pack familiar al que va en
+              la guantera.
+            </p>
+          </div>
         </motion.div>
 
         <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, i) => (
-            <ProductCard key={product.id} product={product} index={i} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={i}
+              total={products.length}
+            />
           ))}
         </div>
       </div>
@@ -79,8 +168,25 @@ export default function MwProducts() {
   );
 }
 
-function ProductCard({ product, index }: { product: Product; index: number }) {
+function ProductCard({
+  product,
+  index,
+  total,
+}: {
+  product: Product;
+  index: number;
+  total: number;
+}) {
   const forSale = Boolean(product.price && product.buyUrl);
+  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null);
+
+  const onMove = (e: MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setSpot({ x: e.clientX - r.left, y: e.clientY - r.top });
+  };
+
+  const num = (index + 1).toString().padStart(2, "0");
+  const tot = total.toString().padStart(2, "0");
 
   return (
     <motion.article
@@ -88,8 +194,39 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
+      onMouseMove={onMove}
+      onMouseLeave={() => setSpot(null)}
       className="mw-glow-hover group relative flex flex-col overflow-hidden rounded-xl border border-[color-mix(in_srgb,var(--mw-accent)_15%,transparent)] bg-[color-mix(in_srgb,var(--mw-fg)_3%,var(--mw-bg))]"
     >
+      {/* Numeración técnica sobre la imagen */}
+      <div className="pointer-events-none absolute left-4 top-4 z-20 flex items-center gap-1.5">
+        <span
+          className="font-mw-heading text-[13px] leading-none"
+          style={{ color: "var(--mw-blue-hot)" }}
+        >
+          {num}
+        </span>
+        <span
+          className="text-[10px] font-mono uppercase tracking-[0.14em] text-[var(--mw-muted)]"
+          style={{
+            fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+          }}
+        >
+          / {tot}
+        </span>
+      </div>
+
+      {/* Spotlight cursor por card */}
+      {spot && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-10 rounded-xl"
+          style={{
+            background: `radial-gradient(circle 320px at ${spot.x}px ${spot.y}px, rgba(56,189,248,0.13), transparent 45%)`,
+          }}
+        />
+      )}
+
       {/* Imagen del producto */}
       {product.floating ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -174,9 +311,21 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             </a>
           </div>
         ) : (
-          <p className="mt-6 text-[11px] uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--mw-muted)_60%,transparent)]">
-            Próximamente disponible
-          </p>
+          <div className="mt-6 flex items-center gap-2">
+            <span className="relative flex h-1.5 w-1.5">
+              <span
+                className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+                style={{ backgroundColor: "var(--mw-blue-hot)" }}
+              />
+              <span
+                className="relative inline-flex h-1.5 w-1.5 rounded-full"
+                style={{ backgroundColor: "var(--mw-blue-hot)" }}
+              />
+            </span>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--mw-muted)_75%,transparent)]">
+              Próximamente disponible
+            </p>
+          </div>
         )}
       </div>
     </motion.article>
