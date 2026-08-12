@@ -15,7 +15,9 @@ export default function MwContact() {
       id="contacto"
       className="relative overflow-hidden py-24 md:py-32"
     >
-      {/* Rim light superior — misma señal de sección que en Por qué / Productos */}
+      {/* ═════════ FIRMA CONTACTO — horizonte cyan al pie + scan lines ═════════ */}
+
+      {/* Rim light superior */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
@@ -25,56 +27,50 @@ export default function MwContact() {
         }}
       />
 
-      {/* Grid pattern técnico con máscara radial (consistente con Por qué / Productos) */}
+      {/* Scan lines verticales — patrón de líneas verticales (no cuadrícula) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(56,189,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.5) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "linear-gradient(90deg, rgba(56,189,248,0.9) 1px, transparent 1px)",
+          backgroundSize: "56px 100%",
           maskImage:
-            "radial-gradient(ellipse at center, black 25%, transparent 75%)",
+            "linear-gradient(to bottom, black 20%, transparent 100%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 25%, transparent 75%)",
+            "linear-gradient(to bottom, black 20%, transparent 100%)",
         }}
       />
 
-      {/* Orbe glow principal — centrado bajo el título para dar peso */}
+      {/* Horizonte cyan al pie — el gran gesto que cierra la página.
+          Franja luminosa saliendo del piso, tipo salida/entrada de escenario. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[420px]"
         style={{
           background:
-            "radial-gradient(circle, rgba(56,189,248,0.28), transparent 60%)",
+            "radial-gradient(ellipse 130% 100% at 50% 100%, rgba(56,189,248,0.45) 0%, rgba(14,165,233,0.18) 30%, transparent 70%)",
+        }}
+      />
+      {/* Línea de horizonte nítida al fondo */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px]"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 10%, rgba(56,189,248,0.7) 50%, transparent 90%)",
+          filter: "blur(1px)",
+        }}
+      />
+
+      {/* Halo suave detrás del título */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[35%] h-[480px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(56,189,248,0.22), transparent 60%)",
           filter: "blur(80px)",
-        }}
-      />
-      {/* Orbe secundario abajo — refuerza la transición al footer */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-80"
-        style={{
-          background:
-            "radial-gradient(ellipse 900px 320px at 50% 100%, rgba(14,165,233,0.18), transparent 70%)",
-        }}
-      />
-
-      {/* Líneas técnicas decorativas laterales (invisibles en mobile) */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-8 hidden w-px opacity-40 md:block"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent 20%, rgba(56,189,248,0.35) 50%, transparent 80%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-8 hidden w-px opacity-40 md:block"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent 20%, rgba(56,189,248,0.35) 50%, transparent 80%)",
         }}
       />
 

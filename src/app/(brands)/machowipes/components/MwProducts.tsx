@@ -36,40 +36,52 @@ export default function MwProducts() {
         </defs>
       </svg>
 
-      {/* Gradiente de transición desde la sección anterior */}
+      {/* ═════════ FIRMA PRODUCTOS — spotlight central + dot matrix ═════════ */}
+
+      {/* Base slightly lifted en el centro, más oscura en los bordes.
+          Da la sensación de una vitrina iluminada. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-40"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(8,17,28,0.7), transparent)",
+            "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(15,30,50,0.7), transparent 75%)",
         }}
       />
 
-      {/* Grid pattern técnico con máscara radial */}
+      {/* Dot matrix — patrón de puntos con máscara radial */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 opacity-[0.10]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(56,189,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.5) 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "radial-gradient(rgba(56,189,248,0.7) 1px, transparent 1.5px)",
+          backgroundSize: "22px 22px",
           maskImage:
-            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+            "radial-gradient(ellipse 90% 80% at 50% 45%, black 20%, transparent 80%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 20%, transparent 75%)",
+            "radial-gradient(ellipse 90% 80% at 50% 45%, black 20%, transparent 80%)",
         }}
       />
 
-      {/* Orbe glow difuso a la izquierda para contra-balancear el orbe
-          derecho de la sección "Por qué Macho" */}
+      {/* Spotlight central superior — foco de vitrina sobre el heading */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[-10%] bottom-[-10%] h-[520px] w-[520px] rounded-full opacity-25"
+        className="pointer-events-none absolute left-1/2 top-0 h-[440px] w-[900px] -translate-x-1/2 opacity-45"
         style={{
           background:
-            "radial-gradient(circle, rgba(56,189,248,0.28), transparent 65%)",
-          filter: "blur(60px)",
+            "radial-gradient(ellipse 100% 100% at 50% 0%, rgba(56,189,248,0.35), transparent 65%)",
+          filter: "blur(50px)",
+        }}
+      />
+
+      {/* Rim light superior */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 15%, rgba(56, 189, 248, 0.5) 50%, transparent 85%)",
         }}
       />
 
