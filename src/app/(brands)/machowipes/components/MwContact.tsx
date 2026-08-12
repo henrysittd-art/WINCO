@@ -13,40 +13,68 @@ export default function MwContact() {
   return (
     <section
       id="contacto"
-      className="relative overflow-hidden py-24 md:py-28"
+      className="relative overflow-hidden py-24 md:py-32"
     >
-      {/* Glow inferior azul */}
+      {/* Rim light superior — misma señal de sección que en Por qué / Productos */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 15%, rgba(56, 189, 248, 0.4) 50%, transparent 85%)",
+        }}
+      />
+
+      {/* Grid pattern técnico con máscara radial (consistente con Por qué / Productos) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(56,189,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.5) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 25%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 25%, transparent 75%)",
+        }}
+      />
+
+      {/* Orbe glow principal — centrado bajo el título para dar peso */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(56,189,248,0.28), transparent 60%)",
+          filter: "blur(80px)",
+        }}
+      />
+      {/* Orbe secundario abajo — refuerza la transición al footer */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-80"
         style={{
           background:
-            "radial-gradient(ellipse 900px 350px at 50% 100%, rgba(14,165,233,0.22), transparent 70%)",
+            "radial-gradient(ellipse 900px 320px at 50% 100%, rgba(14,165,233,0.18), transparent 70%)",
         }}
       />
-      {/* Orbes locales para reforzar profundidad */}
+
+      {/* Líneas técnicas decorativas laterales (invisibles en mobile) */}
       <div
         aria-hidden
-        className="mw-orb"
+        className="pointer-events-none absolute inset-y-0 left-8 hidden w-px opacity-40 md:block"
         style={{
-          width: 500,
-          height: 500,
-          top: "10%",
-          left: "8%",
           background:
-            "radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 65%)",
+            "linear-gradient(to bottom, transparent 20%, rgba(56,189,248,0.35) 50%, transparent 80%)",
         }}
       />
       <div
         aria-hidden
-        className="mw-orb"
+        className="pointer-events-none absolute inset-y-0 right-8 hidden w-px opacity-40 md:block"
         style={{
-          width: 460,
-          height: 460,
-          top: "20%",
-          right: "5%",
           background:
-            "radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 65%)",
+            "linear-gradient(to bottom, transparent 20%, rgba(56,189,248,0.35) 50%, transparent 80%)",
         }}
       />
 
@@ -58,14 +86,37 @@ export default function MwContact() {
           transition={{ duration: 0.6, ease: EASE }}
           className="mx-auto max-w-3xl text-center"
         >
-          <p
-            className="text-[12px] font-semibold uppercase tracking-[0.22em]"
-            style={{ color: "var(--mw-accent)" }}
-          >
-            Dónde conseguirlo
-          </p>
-          <h2 className="font-mw-heading mt-4 text-[36px] leading-[0.9] text-[var(--mw-fg)] md:text-[56px]">
-            <span className="mw-text-neon" style={{ color: "var(--mw-accent)" }}>
+          {/* Eyebrow + tag técnico */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <span
+              aria-hidden
+              className="h-px w-10 opacity-50"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, var(--mw-blue-hot))",
+              }}
+            />
+            <p
+              className="text-[12px] font-semibold uppercase tracking-[0.22em]"
+              style={{ color: "var(--mw-accent)" }}
+            >
+              Dónde conseguirlo
+            </p>
+            <span
+              aria-hidden
+              className="h-px w-10 opacity-50"
+              style={{
+                background:
+                  "linear-gradient(90deg, var(--mw-blue-hot), transparent)",
+              }}
+            />
+          </div>
+
+          <h2 className="font-mw-heading mt-5 text-[36px] leading-[0.9] text-[var(--mw-fg)] md:text-[64px]">
+            <span
+              className="mw-text-neon"
+              style={{ color: "var(--mw-accent)" }}
+            >
               HABLEMOS.
             </span>
           </h2>
@@ -92,6 +143,16 @@ export default function MwContact() {
               <span aria-hidden>→</span>
             </a>
           </div>
+
+          {/* Firma técnica al pie del bloque */}
+          <p
+            className="mt-16 text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--mw-muted)] opacity-70"
+            style={{
+              fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+            }}
+          >
+            MW / CONTACT · 2026
+          </p>
 
           {/*
             Puntos de venta — cuando llegue el kit de logos, colocarlo acá:
