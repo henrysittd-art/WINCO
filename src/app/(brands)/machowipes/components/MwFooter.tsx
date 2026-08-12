@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const YEAR = 2026;
@@ -24,10 +25,15 @@ export default function MwFooter() {
       <div className="mx-auto max-w-[1280px] px-6 py-12 md:px-12 md:py-14">
         <div className="grid gap-8 md:grid-cols-[2fr_1fr_1fr] md:gap-10">
           <div>
-            <span className="font-mw-heading text-[26px] leading-none text-[var(--mw-fg)]">
-              MACHO WIPES
-            </span>
-            <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[var(--mw-muted)]">
+            <Image
+              src="/images/macho-wipes/logo.jpg"
+              alt="Macho Wipes"
+              width={420}
+              height={300}
+              className="-ml-2 h-28 w-auto md:h-32"
+              style={{ filter: "url(#mw-logo-clean)" }}
+            />
+            <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-[var(--mw-muted)]">
               Limpieza personal hecha para hombres.
             </p>
           </div>
