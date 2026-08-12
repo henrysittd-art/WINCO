@@ -1,87 +1,101 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-/*
- * Hero video full-bleed.
- *
- * Poner los archivos de video en /public/videos/macho-wipes/ con estos nombres
- * (idealmente ambos para cobertura de navegadores):
- *   - hero.webm  (VP9, ~2-4 MB, 8-12s loop, muted)
- *   - hero.mp4   (H.264, ~3-6 MB, mismo loop)
- *
- * Mientras no existan los archivos, el <video> muestra el poster
- * (imagen actual del producto) y no se ve rota — solo estática.
- *
- * Recomendación de contenido: 8-12s en loop, sin corte visible;
- * planos cerrados del empaque, wipe siendo sacado del sachet en cámara
- * lenta, o gotas de agua sobre la tela. Sin audio.
- */
-const HERO_POSTER = "/images/macho-wipes/product.jpg";
-const HERO_VIDEO_WEBM = "/videos/macho-wipes/hero.webm";
-const HERO_VIDEO_MP4 = "/videos/macho-wipes/hero.mp4";
+const HERO_IMAGE = "/images/macho-wipes/hero-lineup.png";
 
 export default function MwHero() {
   const reduce = !!useReducedMotion();
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-24 md:pt-20">
-      {/* ═══════ Fondo — video full-bleed (o poster estático si reduce) ═══════ */}
-      {reduce ? (
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${HERO_POSTER})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+      {/* ═══════ Fondo — imagen full-bleed con Ken Burns lento ═══════ */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.02 }}
+        animate={reduce ? undefined : { scale: [1.02, 1.09, 1.02] }}
+        transition={
+          reduce
+            ? undefined
+            : {
+                duration: 22,
+                ease: [0.4, 0, 0.6, 1],
+                repeat: Infinity,
+              }
+        }
+      >
+        <Image
+          src={HERO_IMAGE}
+          alt="Macho Wipes — línea de productos"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
         />
-      ) : (
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={HERO_POSTER}
-          aria-hidden
-        >
-          <source src={HERO_VIDEO_WEBM} type="video/webm" />
-          <source src={HERO_VIDEO_MP4} type="video/mp4" />
-        </video>
-      )}
+      </motion.div>
 
-      {/* ═══════ Overlays: legibilidad + acento azul + rim light ═══════ */}
-      {/* Vignette diagonal — más oscuro en la izquierda (donde va el texto),
-          fade hacia la derecha para dejar respirar el video */}
+      {/* ═══════ Neon pulse — respira con las luces azules del set ═══════ */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 900px 520px at 55% 42%, rgba(56, 189, 248, 0.34) 0%, rgba(14, 165, 233, 0.10) 40%, transparent 68%)",
+          mixBlendMode: "screen",
+        }}
+        animate={reduce ? undefined : { opacity: [0.5, 1, 0.5] }}
+        transition={
+          reduce
+            ? undefined
+            : {
+                duration: 3.8,
+                ease: [0.4, 0, 0.4, 1],
+                repeat: Infinity,
+              }
+        }
+      />
+
+      {/* Segundo pulso desfasado — refuerza sensación de tubos neon */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 620px 380px at 20% 55%, rgba(56, 189, 248, 0.18) 0%, transparent 60%)",
+          mixBlendMode: "screen",
+        }}
+        animate={reduce ? undefined : { opacity: [0.9, 0.45, 0.9] }}
+        transition={
+          reduce
+            ? undefined
+            : {
+                duration: 4.4,
+                ease: [0.4, 0, 0.4, 1],
+                repeat: Infinity,
+              }
+        }
+      />
+
+      {/* ═══════ Overlay de legibilidad — más oscuro a la izquierda,
+              fade hacia la derecha para dejar el logo y productos visibles ═══════ */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(100deg, rgba(5,11,20,0.88) 0%, rgba(5,11,20,0.72) 32%, rgba(5,11,20,0.42) 62%, rgba(5,11,20,0.28) 100%)",
+            "linear-gradient(100deg, rgba(5,11,20,0.92) 0%, rgba(5,11,20,0.78) 28%, rgba(5,11,20,0.42) 55%, rgba(5,11,20,0.14) 80%, transparent 100%)",
         }}
       />
-      {/* Fade inferior — refuerza el borde con la sección siguiente */}
+      {/* Fade inferior — borde suave con la sección siguiente */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
         style={{
           background:
-            "linear-gradient(to bottom, transparent, rgba(5,11,20,0.9))",
-        }}
-      />
-      {/* Glow azul concentrado a la derecha */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 620px 460px at 78% 45%, rgba(56, 189, 248, 0.28) 0%, rgba(14, 165, 233, 0.10) 40%, transparent 70%)",
+            "linear-gradient(to bottom, transparent, rgba(5,11,20,0.92))",
         }}
       />
       {/* Rim light superior */}
@@ -100,7 +114,7 @@ export default function MwHero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="max-w-[720px]"
+          className="max-w-[620px]"
         >
           <p
             className="mb-6 text-[12px] font-semibold uppercase tracking-[0.22em]"
@@ -108,7 +122,7 @@ export default function MwHero() {
           >
             Macho Wipes
           </p>
-          <h1 className="font-mw-heading text-[44px] leading-[0.86] tracking-[0.005em] text-[var(--mw-fg)] md:text-[64px] lg:text-[86px]">
+          <h1 className="font-mw-heading text-[44px] leading-[0.86] tracking-[0.005em] text-[var(--mw-fg)] md:text-[60px] lg:text-[78px]">
             LIMPIEZA
             <br />
             PERSONAL HECHA
