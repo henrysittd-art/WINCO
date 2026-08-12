@@ -10,67 +10,60 @@ export type Product = {
   // automáticamente el botón "COMPRAR AHORA" sin rediseñar nada.
   price?: string;
   buyUrl?: string;
+  // Cuando la imagen es una foto individual del empaque sobre fondo oscuro,
+  // se renderiza sin overlay ni mix-blend y ocupa más espacio en la card.
+  floating?: boolean;
 };
 
 export const products: Product[] = [
   {
-    id: "xl-wipes",
-    nombre: "XL Wipes",
-    formato: "Bolsa resellable",
+    id: "xl-flushable",
+    nombre: "XL Flushable Wipes",
+    formato: "Paquete resellable",
     cantidad: "48 wipes · 7×7 in",
     descripcion:
-      "Tamaño XL para máxima cobertura. Fragance-free, con 99% agua purificada e ingredientes de origen vegetal.",
-    // TODO: reemplazar por foto individual del XL Wipes
+      "Tamaño XL para máxima cobertura. Fragrance-free con 99% agua purificada e ingredientes de origen vegetal que se desintegran en el inodoro.",
+    // TODO: reemplazar por foto individual del XL Flushable Lady
     imagen: "/images/lady-wipes/product.jpg",
   },
   {
-    id: "pack-6",
-    nombre: "Pack de 6",
-    formato: "Caja multi-pack",
-    cantidad: "6 × 48 wipes",
+    id: "cylinder",
+    nombre: "Cylinder",
+    formato: "Envase rígido",
+    cantidad: "60 wipes · 7×7 in",
     descripcion:
-      "El value pack. Dermatológicamente testeado, pH balanceado, ideal para uso diario en casa.",
-    // TODO: reemplazar por foto individual del Pack de 6
-    imagen: "/images/lady-wipes/product.jpg",
-  },
-  {
-    id: "48-flushable",
-    nombre: "48 Flushable Wipes",
-    formato: "Paquete estándar",
-    cantidad: "48 wipes · 7×7 in",
-    descripcion:
-      "El clásico del baño de casa. Fibras vegetales que se desintegran en el inodoro.",
-    // TODO: reemplazar por foto individual del pack de 48
-    imagen: "/images/lady-wipes/product.jpg",
-  },
-  {
-    id: "24-wipes",
-    nombre: "24 Wipes",
-    formato: "Bolsa compacta",
-    cantidad: "24 wipes",
-    descripcion:
-      "Punto medio ideal para probar o para llevar en la cartera. Sin alcohol, sin parabenos.",
-    // TODO: reemplazar por foto individual del pack de 24
+      "Cilindro rígido con cierre hermético. Dispensa una toallita a la vez sin que se sequen las demás.",
+    // TODO: reemplazar por foto individual del Cylinder Lady
     imagen: "/images/lady-wipes/product.jpg",
   },
   {
     id: "travel-pack",
     nombre: "Travel Pack",
-    formato: "Bolsillo de viaje",
-    cantidad: "10 wipes",
+    formato: "Bolsa resellable",
+    cantidad: "24 wipes · XL",
     descripcion:
-      "Para la cartera, el gym, la oficina, el viaje largo. Cierre hermético que evita que se sequen.",
-    // TODO: reemplazar por foto individual del travel pack
+      "El formato portátil. Bolsa resellable con hanger — cabe en la cartera, la mochila o el gym.",
+    // TODO: reemplazar por foto individual del Travel Pack Lady
     imagen: "/images/lady-wipes/product.jpg",
   },
   {
-    id: "canister",
-    nombre: "Tarro dispensador",
-    formato: "Envase rígido",
-    cantidad: "48 wipes · 7×7 in",
+    id: "on-the-go",
+    nombre: "On The Go",
+    formato: "Sachet slim",
+    cantidad: "10 wipes",
     descripcion:
-      "Se queda en la casa. Dispensa uno a la vez, cierre hermético — el resto se mantiene húmedo.",
-    // TODO: reemplazar por foto individual del tarro
+      "Formato ultra portátil de 10 wipes. Discreto y siempre a mano para el día a día — cartera, gimnasio o carro.",
+    // TODO: reemplazar por foto individual del On The Go Lady
+    imagen: "/images/lady-wipes/product.jpg",
+  },
+  {
+    id: "pocket-size",
+    nombre: "Pocket Size",
+    formato: "Caja dispensadora",
+    cantidad: "30 wipes individuales",
+    descripcion:
+      "Cada wipe viene sellado en su propio sobre — perfecto para llevar uno cuando sabés que va a hacer falta.",
+    // TODO: reemplazar por foto individual del Pocket Size Lady
     imagen: "/images/lady-wipes/product.jpg",
   },
 ];

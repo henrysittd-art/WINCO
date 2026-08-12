@@ -1,23 +1,99 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
+const HERO_IMAGE = "/images/lady-wipes/hero-lineup.jpg";
+
 export default function LwHero() {
+  const reduce = !!useReducedMotion();
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden pt-24 md:pt-20">
-      {/* Glow principal — magenta concentrado, no muddy */}
+      {/* ═══════ Fondo — imagen full-bleed con Ken Burns lento ═══════ */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ scale: 1.02 }}
+        animate={reduce ? undefined : { scale: [1.02, 1.09, 1.02] }}
+        transition={
+          reduce
+            ? undefined
+            : {
+                duration: 22,
+                ease: [0.4, 0, 0.6, 1],
+                repeat: Infinity,
+              }
+        }
+      >
+        <Image
+          src={HERO_IMAGE}
+          alt="Lady Wipes — línea de productos"
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </motion.div>
+
+      {/* ═══════ Pink neon pulse — respira con las luces rosadas del set ═══════ */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 900px 520px at 55% 42%, rgba(255, 82, 170, 0.34) 0%, rgba(255, 31, 143, 0.10) 40%, transparent 68%)",
+          mixBlendMode: "screen",
+        }}
+        animate={reduce ? undefined : { opacity: [0.5, 1, 0.5] }}
+        transition={
+          reduce
+            ? undefined
+            : {
+                duration: 3.8,
+                ease: [0.4, 0, 0.4, 1],
+                repeat: Infinity,
+              }
+        }
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 620px 380px at 20% 55%, rgba(255, 82, 170, 0.18) 0%, transparent 60%)",
+          mixBlendMode: "screen",
+        }}
+        animate={reduce ? undefined : { opacity: [0.9, 0.45, 0.9] }}
+        transition={
+          reduce
+            ? undefined
+            : {
+                duration: 4.4,
+                ease: [0.4, 0, 0.4, 1],
+                repeat: Infinity,
+              }
+        }
+      />
+
+      {/* ═══════ Overlay diagonal — oscuro a la izquierda, fade a la derecha ═══════ */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 720px 500px at 68% 45%, rgba(255, 82, 170, 0.45) 0%, rgba(255, 31, 143, 0.18) 35%, transparent 65%)",
+            "linear-gradient(100deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.78) 28%, rgba(0,0,0,0.42) 55%, rgba(0,0,0,0.14) 80%, transparent 100%)",
         }}
       />
-      {/* Rim light superior — línea fina de luz */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, rgba(0,0,0,0.92))",
+        }}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
@@ -27,48 +103,13 @@ export default function LwHero() {
         }}
       />
 
-      {/* Líneas de neón diagonales — muy tenues */}
-      <svg
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="lw-neon-h" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255,82,170,0)" />
-            <stop offset="50%" stopColor="rgba(255,82,170,0.3)" />
-            <stop offset="100%" stopColor="rgba(255,82,170,0)" />
-          </linearGradient>
-          <linearGradient id="lw-neon-h2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255,82,170,0)" />
-            <stop offset="50%" stopColor="rgba(255,82,170,0.18)" />
-            <stop offset="100%" stopColor="rgba(255,82,170,0)" />
-          </linearGradient>
-        </defs>
-        <line
-          x1="-10%"
-          y1="30%"
-          x2="110%"
-          y2="10%"
-          stroke="url(#lw-neon-h)"
-          strokeWidth="0.75"
-        />
-        <line
-          x1="-10%"
-          y1="85%"
-          x2="110%"
-          y2="65%"
-          stroke="url(#lw-neon-h2)"
-          strokeWidth="0.75"
-        />
-      </svg>
-
-      <div className="relative mx-auto grid w-full max-w-[1280px] gap-10 px-6 py-16 md:grid-cols-[1.1fr_1fr] md:items-center md:gap-12 md:px-12 md:py-24">
+      {/* ═══════ Contenido overlay ═══════ */}
+      <div className="relative mx-auto w-full max-w-[1280px] px-6 py-16 md:px-12 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="order-2 md:order-1"
+          className="max-w-[620px]"
         >
           <p
             className="mb-6 text-[12px] font-semibold uppercase tracking-[0.22em]"
@@ -76,7 +117,7 @@ export default function LwHero() {
           >
             Lady Wipes
           </p>
-          <h1 className="font-lw-heading text-[44px] leading-[0.86] tracking-[0.005em] text-[var(--lw-fg)] md:text-[64px] lg:text-[86px]">
+          <h1 className="font-lw-heading text-[44px] leading-[0.86] tracking-[0.005em] text-[var(--lw-fg)] md:text-[60px] lg:text-[78px]">
             FRESCURA
             <br />
             Y CUIDADO
@@ -101,28 +142,6 @@ export default function LwHero() {
               Ver productos
               <span aria-hidden>→</span>
             </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-          className="relative order-1 md:order-2"
-        >
-          <div className="relative aspect-[16/10] w-full">
-            <Image
-              src="/images/lady-wipes/product.jpg"
-              alt="Línea Lady Wipes"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="lw-hero-image object-contain"
-              style={{
-                filter:
-                  "url(#lw-logo-clean) brightness(1.08) contrast(1.12) saturate(1.2)",
-              }}
-              priority
-            />
           </div>
         </motion.div>
       </div>

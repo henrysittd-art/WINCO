@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useState, type MouseEvent } from "react";
 import { products, type Product } from "../data/products";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -12,39 +13,91 @@ export default function LwProducts() {
       id="productos"
       className="relative overflow-hidden py-24 md:py-32"
     >
-      {/* Transición desde la sección anterior */}
+      {/* Filtro SVG que liftea los negros puros a un gris consistente,
+          para que las fotos de empaques sobre fondo negro se vean con
+          la misma ambient grey de las que traen fondo fotográfico. */}
+      <svg
+        aria-hidden
+        width="0"
+        height="0"
+        className="absolute"
+        style={{ position: "absolute", width: 0, height: 0 }}
+      >
+        <defs>
+          <filter id="lw-lift-blacks" colorInterpolationFilters="sRGB">
+            <feComponentTransfer>
+              <feFuncR type="linear" slope="0.9" intercept="0.11" />
+              <feFuncG type="linear" slope="0.9" intercept="0.11" />
+              <feFuncB type="linear" slope="0.9" intercept="0.11" />
+            </feComponentTransfer>
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Rim light superior */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-40"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(20,6,15,0.7), transparent)",
+            "linear-gradient(90deg, transparent 15%, rgba(255, 82, 170, 0.5) 50%, transparent 85%)",
         }}
       />
-      <div className="mx-auto max-w-[1280px] px-6 md:px-12">
+
+      {/* Pink glow — abajo a la izquierda */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-[-10%] bottom-[-10%] h-[580px] w-[580px] rounded-full opacity-50"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(255, 82, 170, 0.34), transparent 65%)",
+          filter: "blur(80px)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[1280px] px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end"
+          className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end"
         >
           <div>
-            <p
-              className="text-[12px] font-semibold uppercase tracking-[0.22em]"
-              style={{ color: "var(--lw-pink-hot)" }}
-            >
-              Nuestra línea
-            </p>
-            <h2 className="font-lw-heading mt-4 text-[36px] leading-[0.9] text-[var(--lw-fg)] md:text-[56px]">
+            <div className="flex items-center gap-4">
+              <p
+                className="text-[12px] font-semibold uppercase tracking-[0.22em]"
+                style={{ color: "var(--lw-pink-hot)" }}
+              >
+                Nuestra línea
+              </p>
+              <span
+                aria-hidden
+                className="h-px w-14 opacity-60"
+                style={{
+                  background:
+                    "linear-gradient(90deg, var(--lw-pink-hot), transparent)",
+                }}
+              />
+              <span
+                className="text-[10px] font-mono uppercase tracking-[0.18em] text-[var(--lw-muted)]"
+                style={{
+                  fontFamily:
+                    "ui-monospace, SFMono-Regular, Menlo, monospace",
+                }}
+              >
+                LW / LINE-UP · 2026
+              </span>
+            </div>
+            <h2 className="font-lw-heading mt-4 text-[36px] leading-[0.95] text-[var(--lw-fg)] md:text-[56px]">
               ELEGÍ TU
               <br />
               PRESENTACIÓN.
             </h2>
           </div>
-          <p className="max-w-md text-[15px] leading-relaxed text-[var(--lw-muted)]">
-            Formatos pensados para cada momento — del pack familiar al que
-            va en la cartera.
+          <p className="max-w-md text-[15px] leading-relaxed text-[var(--lw-muted)] md:text-right">
+            Formatos pensados para cada momento — del pack familiar al que va
+            en la cartera.
           </p>
         </motion.div>
 
@@ -58,8 +111,20 @@ export default function LwProducts() {
   );
 }
 
-function ProductCard({ product, index }: { product: Product; index: number }) {
+function ProductCard({
+  product,
+  index,
+}: {
+  product: Product;
+  index: number;
+}) {
   const forSale = Boolean(product.price && product.buyUrl);
+  const [spot, setSpot] = useState<{ x: number; y: number } | null>(null);
+
+  const onMove = (e: MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    setSpot({ x: e.clientX - r.left, y: e.clientY - r.top });
+  };
 
   return (
     <motion.article
@@ -67,29 +132,68 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.55, delay: index * 0.08, ease: EASE }}
-      className="lw-card group flex flex-col"
+      onMouseMove={onMove}
+      onMouseLeave={() => setSpot(null)}
+      className="lw-card group relative flex flex-col overflow-hidden"
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
+      {/* Spotlight cursor rosado por card */}
+      {spot && (
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-70"
+          className="pointer-events-none absolute inset-0 z-10 rounded-[14px]"
           style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(255,82,170,0.28), transparent 70%)",
+            background: `radial-gradient(circle 320px at ${spot.x}px ${spot.y}px, rgba(255,82,170,0.15), transparent 45%)`,
           }}
         />
-        <Image
-          src={product.imagen}
-          alt={product.nombre}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="relative object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-          style={{
-            filter:
-              "url(#lw-logo-clean) brightness(1.05) contrast(1.08) saturate(1.15)",
-          }}
-        />
-      </div>
+      )}
+
+      {/* Imagen del producto */}
+      {product.floating ? (
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          {/* Ambient grey sólido de canto a canto en el área de imagen */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{ backgroundColor: "#1c1c1c" }}
+          />
+          <Image
+            src={product.imagen}
+            alt={product.nombre}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="relative scale-[1.22] object-contain transition-transform duration-500 ease-out group-hover:scale-[1.28]"
+            style={{
+              filter: "url(#lw-lift-blacks)",
+              maskImage:
+                "radial-gradient(ellipse 80% 82% at 50% 52%, #000 60%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 80% 82% at 50% 52%, #000 60%, transparent 100%)",
+            }}
+          />
+        </div>
+      ) : (
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-70"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(255,82,170,0.28), transparent 70%)",
+            }}
+          />
+          <Image
+            src={product.imagen}
+            alt={product.nombre}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="relative object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+            style={{
+              filter:
+                "url(#lw-logo-clean) brightness(1.05) contrast(1.08) saturate(1.15)",
+            }}
+          />
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <span
@@ -108,7 +212,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           {product.descripcion}
         </p>
 
-        {forSale ? (
+        {forSale && (
           <div className="mt-6 flex items-center justify-between">
             <span className="font-lw-heading text-[22px] text-[var(--lw-fg)]">
               {product.price}
@@ -121,10 +225,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               <span aria-hidden>→</span>
             </a>
           </div>
-        ) : (
-          <p className="mt-6 text-[11px] uppercase tracking-[0.18em] text-[color-mix(in_srgb,var(--lw-muted)_60%,transparent)]">
-            Próximamente disponible
-          </p>
         )}
       </div>
     </motion.article>

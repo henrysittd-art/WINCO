@@ -4,8 +4,8 @@
 */
 
 .ladywipes {
-  --lw-black: #14060F;
-  --lw-black-lift: #22091A;
+  --lw-black: #000000;
+  --lw-black-lift: #0F0509;
   --lw-pink: #FF1F8F;
   --lw-pink-hot: #FF52AA;
   --lw-lime: #7CE04A;
@@ -31,16 +31,21 @@
 .ladywipes-shell {
   background:
     radial-gradient(
-      ellipse 720px 520px at 25% 20%,
-      rgba(255, 82, 170, 0.12),
+      ellipse 820px 620px at 20% 15%,
+      rgba(255, 82, 170, 0.22),
       transparent 55%
     ),
     radial-gradient(
-      ellipse 620px 480px at 82% 85%,
-      rgba(255, 31, 143, 0.09),
+      ellipse 720px 560px at 85% 85%,
+      rgba(255, 31, 143, 0.18),
       transparent 55%
     ),
-    linear-gradient(180deg, #1A0812 0%, #14060F 100%);
+    radial-gradient(
+      ellipse 600px 450px at 50% 50%,
+      rgba(255, 82, 170, 0.07),
+      transparent 60%
+    ),
+    #000000;
 }
 
 .lw-orb {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const YEAR = 2026;
@@ -21,53 +22,47 @@ export default function LwFooter() {
         }}
       />
 
-      <div className="mx-auto max-w-[1280px] px-6 py-12 md:px-12 md:py-14">
-        <div className="grid gap-8 md:grid-cols-[2fr_1fr_1fr] md:gap-10">
-          <div>
-            <span className="font-lw-heading text-[26px] leading-none text-[var(--lw-fg)]">
-              LADY WIPES
-            </span>
-            <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-[var(--lw-muted)]">
-              Frescura y cuidado para todos los días.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--lw-muted)]">
-              Navegar
-            </p>
-            <ul className="mt-4 space-y-2 text-[13px]">
-              {NAV.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    className="text-[color-mix(in_srgb,var(--lw-fg)_75%,transparent)] transition-colors duration-200 hover:text-[var(--lw-fg)]"
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--lw-muted)]">
-              Más
-            </p>
-            <ul className="mt-4 space-y-2 text-[13px]">
-              <li>
-                <Link
-                  href="/"
-                  className="text-[color-mix(in_srgb,var(--lw-fg)_75%,transparent)] transition-colors duration-200 hover:text-[var(--lw-fg)]"
-                >
-                  WINCO
-                </Link>
-              </li>
-            </ul>
-          </div>
+      <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-12 md:py-20">
+        {/* ═════════ Logo grande centrado + tagline ═════════ */}
+        <div className="flex flex-col items-center text-center">
+          <Image
+            src="/images/lady-wipes/logo.jpg"
+            alt="Lady Wipes"
+            width={640}
+            height={460}
+            className="h-40 w-auto md:h-56 lg:h-64"
+            style={{ filter: "url(#lw-logo-clean)" }}
+          />
+          <p className="-mt-6 max-w-md text-[14px] leading-relaxed text-[var(--lw-muted)] md:-mt-10 md:text-[15px]">
+            Frescura y cuidado para todos los días.
+          </p>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-3 border-t border-[color-mix(in_srgb,var(--lw-fg)_8%,transparent)] pt-6 text-[12px] text-[var(--lw-muted)] md:flex-row md:items-center">
+        {/* ═════════ Nav links centrados en fila ═════════ */}
+        <nav className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 md:mt-12 md:gap-x-12">
+          {NAV.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[color-mix(in_srgb,var(--lw-fg)_75%,transparent)] transition-colors duration-200 hover:text-[var(--lw-pink-hot)]"
+            >
+              {l.label}
+            </a>
+          ))}
+          <span
+            aria-hidden
+            className="hidden h-4 w-px bg-[color-mix(in_srgb,var(--lw-fg)_18%,transparent)] md:inline-block"
+          />
+          <Link
+            href="/"
+            className="text-[12px] font-semibold uppercase tracking-[0.16em] text-[color-mix(in_srgb,var(--lw-fg)_75%,transparent)] transition-colors duration-200 hover:text-[var(--lw-pink-hot)]"
+          >
+            WINCO
+          </Link>
+        </nav>
+
+        {/* ═════════ Bottom bar ═════════ */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-[color-mix(in_srgb,var(--lw-fg)_8%,transparent)] pt-6 text-[12px] text-[var(--lw-muted)] md:flex-row md:items-center">
           <p>© {YEAR} Lady Wipes. Una marca de WINCO.</p>
           <p className="text-[color-mix(in_srgb,var(--lw-muted)_70%,transparent)]">
             Todos los derechos reservados.
