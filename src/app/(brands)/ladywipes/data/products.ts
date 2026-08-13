@@ -33,8 +33,8 @@ export const products: Product[] = [
     cantidad: "60 wipes · 7×7 in",
     descripcion:
       "Cilindro rígido con cierre hermético. Dispensa una toallita a la vez sin que se sequen las demás.",
-    // TODO: reemplazar por foto individual del Cylinder Lady
-    imagen: "/images/lady-wipes/product.jpg",
+    imagen: "/images/lady-wipes/cylinder.png",
+    floating: true,
   },
   {
     id: "travel-pack",
