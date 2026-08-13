@@ -53,8 +53,8 @@ export const products: Product[] = [
     cantidad: "10 wipes",
     descripcion:
       "Formato ultra portátil de 10 wipes. Discreto y siempre a mano para el día a día — cartera, gimnasio o carro.",
-    // TODO: reemplazar por foto individual del On The Go Lady
-    imagen: "/images/lady-wipes/product.jpg",
+    imagen: "/images/lady-wipes/on-the-go.png",
+    floating: true,
   },
   {
     id: "pocket-size",
