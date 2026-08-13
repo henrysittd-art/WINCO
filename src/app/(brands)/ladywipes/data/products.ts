@@ -43,8 +43,8 @@ export const products: Product[] = [
     cantidad: "24 wipes · XL",
     descripcion:
       "El formato portátil. Bolsa resellable con hanger — cabe en la cartera, la mochila o el gym.",
-    // TODO: reemplazar por foto individual del Travel Pack Lady
-    imagen: "/images/lady-wipes/product.jpg",
+    imagen: "/images/lady-wipes/travel-pack.png",
+    floating: true,
   },
   {
     id: "on-the-go",
