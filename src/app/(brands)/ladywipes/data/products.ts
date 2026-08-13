@@ -63,7 +63,7 @@ export const products: Product[] = [
     cantidad: "30 wipes individuales",
     descripcion:
       "Cada wipe viene sellado en su propio sobre — perfecto para llevar uno cuando sabés que va a hacer falta.",
-    // TODO: reemplazar por foto individual del Pocket Size Lady
-    imagen: "/images/lady-wipes/product.jpg",
+    imagen: "/images/lady-wipes/pocket-size.png",
+    floating: true,
   },
 ];
